@@ -1,19 +1,17 @@
-# .gitignore para proyecto React + Vite + Tailwind
-
-# Dependencias
+# Dependencies
 node_modules/
 
 # Builds
 /dist
 /build
 
-# Archivos temporales
+# Logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Sistema operativo
+# OS
 .DS_Store
 Thumbs.db
 
@@ -22,13 +20,13 @@ Thumbs.db
 .idea/
 *.swp
 
-# Archivos locales de entorno
+# Env
 .env
 .env.*.local
 
-# Archivos generados por TypeScript
+# TypeScript
 *.tsbuildinfo
 
-# Archivos de lock si se usa otra herramienta
+# Locks (when not using them)
 pnpm-lock.yaml
 yarn.lock
