@@ -1,8 +1,10 @@
 import { Link, NavLink } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
+import { useAuth } from '@/auth/auth'
 
 export default function Navbar() {
-  const linkCls = ({ isActive }: {isActive:boolean}) =>
+  const { user, login, logout } = useAuth()
+  const linkCls = ({ isActive }: { isActive: boolean }) =>
     'hover:opacity-80 ' + (isActive ? 'font-semibold' : 'text-gray-700')
 
   return (
@@ -12,6 +14,7 @@ export default function Navbar() {
           <div className="w-8 h-8 rounded-2xl bg-black" />
           <span className="font-semibold">Asociación Educativa</span>
         </Link>
+
         <nav className="hidden md:flex items-center gap-6 text-sm">
           <NavLink to="/videos" className={linkCls}>Videos</NavLink>
           <NavLink to="/simuladores" className={linkCls}>Simuladores</NavLink>
@@ -19,10 +22,28 @@ export default function Navbar() {
           <NavLink to="/articulos" className={linkCls}>Artículos</NavLink>
           <NavLink to="/recursos" className={linkCls}>Recursos</NavLink>
           <NavLink to="/foros" className={linkCls}>Foros</NavLink>
+          <NavLink to="/ejercicios" className={linkCls}>Ejercicios</NavLink>
+          <NavLink to="/cuestionarios" className={linkCls}>Cuestionarios</NavLink>
         </nav>
+
         <div className="flex items-center gap-2">
-          <Button variant="ghost" className="hidden sm:inline-flex">Ingresar</Button>
-          <Button className="rounded-2xl">Crear cuenta</Button>
+          {user ? (
+            <>
+              <span className="text-sm text-gray-700 hidden sm:inline">
+                Hola, {user.name} ({user.role})
+              </span>
+              <Button variant="outline" onClick={logout}>Salir</Button>
+            </>
+          ) : (
+            <>
+              <Button variant="ghost" onClick={() => login('student')} className="hidden sm:inline-flex">
+                Entrar alumno
+              </Button>
+              <Button onClick={() => login('moderator')} className="rounded-2xl">
+                Entrar moderador
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </header>
